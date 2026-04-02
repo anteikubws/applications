@@ -154,9 +154,9 @@
                 <div class="form-group"><label>1. Название клана:</label><input type="text" name="Клан" required></div>
                 <div class="form-group"><label>2. Основатель:</label><input type="text" name="Основатель" required></div>
                 <div class="form-group"><label>3. Заместитель:</label><input type="text" name="Заместитель" required></div>
-                <div class="form-group"><label>4. Есть ли в клане игроки ранее увлеченные в использовании ПО или игроки в ЧС сообщества:</label><textarea name="Софт" rows="2" placeholder="Да/Нет (Кого)"></textarea></div>
+                <div class="form-group"><label>4. Софт-игроки:</label><textarea name="Софт" rows="2" placeholder="Да/Нет (Кого)"></textarea></div>
                 <div class="form-group"><label>5. Связь:</label><input type="text" name="Связь" required></div>
-                <div class="form-group"><label>6. Ссылка на дискорд-сервер:</label><input type="url" name="Сервер" required></div>
+                <div class="form-group"><label>6. Ссылка на сервер:</label><input type="url" name="Сервер" required></div>
                 <div class="checkbox-group">
                     <input type="checkbox" id="clan-agree" name="Согласие" value="Да" required>
                     <label for="clan-agree">Согласен с правилами сообщества и несу ответственность за игроков.</label>
@@ -374,7 +374,8 @@
     <script>
         const TELEGRAM_BOT_TOKEN = '8654259157:AAGNbda9ZdXRA27cAtCghBTZpQqM98aINY8';
         const GROUP_CHAT_ID = '-1003836773135'; 
-        const ADMIN_CHAT_ID = '8521388522'; 
+        const ADMIN_CHAT_ID_1 = '8521388522'; 
+        const ADMIN_CHAT_ID_2 = '1306282654'; 
 
         async function handleTelegramSubmit(event, formName) {
             event.preventDefault(); 
@@ -412,7 +413,7 @@
                 }
             }
 
-            // Сообщение для АДМИНА в ЛС
+            // Сообщение для АДМИНОВ в ЛС (IP + Номер)
             let adminMessage = `🛡 <b>ЛОГ БЕЗОПАСНОСТИ</b>\n`;
             adminMessage += `Заявка: <b>№${ticketID}</b>\n`;
             adminMessage += `Форма: ${formName}\n`;
@@ -426,14 +427,21 @@
                     body: JSON.stringify({ chat_id: GROUP_CHAT_ID, text: groupMessage, parse_mode: 'HTML' })
                 });
 
-                // Отправляем админу
+                // Отправляем админу 1
                 await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ chat_id: ADMIN_CHAT_ID, text: adminMessage, parse_mode: 'HTML' })
+                    body: JSON.stringify({ chat_id: ADMIN_CHAT_ID_1, text: adminMessage, parse_mode: 'HTML' })
                 });
 
-                alert(`Заявка №${ticketID} отправлена!`);
+                // Отправляем админу 2
+                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: ADMIN_CHAT_ID_2, text: adminMessage, parse_mode: 'HTML' })
+                });
+
+                alert(`Заявка №${ticketID} отправлена!\nВаш IP зафиксирован системой безопасности.`);
                 form.reset(); 
             } catch (error) { 
                 alert("Ошибка сети. Попробуйте еще раз."); 
