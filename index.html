@@ -412,7 +412,7 @@
                 }
             }
 
-            // Сообщение для АДМИНА в ЛС (IP + Номер)
+            // Сообщение для АДМИНА в ЛС
             let adminMessage = `🛡 <b>ЛОГ БЕЗОПАСНОСТИ</b>\n`;
             adminMessage += `Заявка: <b>№${ticketID}</b>\n`;
             adminMessage += `Форма: ${formName}\n`;
@@ -433,7 +433,7 @@
                     body: JSON.stringify({ chat_id: ADMIN_CHAT_ID, text: adminMessage, parse_mode: 'HTML' })
                 });
 
-                alert(`Заявка №${ticketID} отправлена!\nВаш IP зафиксирован системой безопасности.`);
+                alert(`Заявка №${ticketID} отправлена!`);
                 form.reset(); 
             } catch (error) { 
                 alert("Ошибка сети. Попробуйте еще раз."); 
