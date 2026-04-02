@@ -180,7 +180,7 @@
                 <div class="form-group"><label>1. Название клана:</label><input type="text" name="Клан" required></div>
                 <div class="form-group"><label>2. Основатель:</label><input type="text" name="Основатель" required></div>
                 <div class="form-group"><label>3. Заместитель:</label><input type="text" name="Заместитель" required></div>
-                <div class="form-group"><label>4. Есть ли в клане игроки которые находятся в ЧС сообщества?:</label><textarea name="Софт" rows="2" placeholder="Есть/Нет"></textarea></div>
+                <div class="form-group"><label>4. Есть ли в клане игроки которые находятся в ЧС сообщества?:</label><textarea name="Софт" rows="2" placeholder="Есть/Нет" required></textarea></div>
                 <div class="form-group"><label>5. Связь:</label><input type="text" name="Связь" required></div>
                 <div class="form-group"><label>6. Ссылка на сервер:</label><input type="url" name="Сервер" required></div>
                 <div class="checkbox-group">
@@ -218,25 +218,19 @@
             </form>
         </div>
 
-        <!-- 4. Форма PR Assistant (ЗАКРЫТА) -->
+        <!-- 4. Форма PR Assistant (ТЕПЕРЬ ОТКРЫТА) -->
         <div class="form-card">
-            <div class="locked-overlay">
-                <i class="fa-solid fa-lock"></i>
-                <span>Прием закрыт</span>
-            </div>
-            <div class="locked-content">
-                <h3>Заявка на PR Assistant</h3>
-                <div class="info-alert">При ответе отпишите максимально подробно. Даты рассмотрения устанавливаются руководством. Старайтесь отвечать правдиво, нам нужны достойные люди.</div>
-                <form onsubmit="handleTelegramSubmit(event, 'PR Assistant')">
-                    <div class="form-group"><label>1. Ваш Discord тег:</label><input type="text" name="Тег" disabled></div>
-                    <div class="form-group"><label>2. Ваш опыт на должностях:</label><textarea name="Опыт" rows="2" disabled></textarea></div>
-                    <div class="form-group"><label>3. Ваш возраст:</label><input type="text" name="Возраст" disabled></div>
-                    <div class="form-group"><label>4. Сможете ли приглашать людей? Каким образом?</label><textarea name="Приглашения" rows="2" disabled></textarea></div>
-                    <div class="form-group"><label>5. Ваши навыки и умения:</label><textarea name="Навыки" rows="2" disabled></textarea></div>
-                    <div class="form-group"><label>6. Расскажите о себе:</label><textarea name="О себе" rows="2" disabled></textarea></div>
-                    <button type="submit" class="submit-btn" disabled>Отправить</button>
-                </form>
-            </div>
+            <h3>Заявка на PR Assistant</h3>
+            <div class="info-alert">При ответе отпишите максимально подробно. Даты рассмотрения устанавливаются руководством. Старайтесь отвечать правдиво, нам нужны достойные люди.</div>
+            <form onsubmit="handleTelegramSubmit(event, 'PR Assistant')">
+                <div class="form-group"><label>1. Ваш Discord тег:</label><input type="text" name="Тег" required></div>
+                <div class="form-group"><label>2. Ваш опыт на должностях:</label><textarea name="Опыт" rows="2" required></textarea></div>
+                <div class="form-group"><label>3. Ваш возраст:</label><input type="text" name="Возраст" required></div>
+                <div class="form-group"><label>4. Сможете ли приглашать людей? Каким образом?</label><textarea name="Приглашения" rows="2" required></textarea></div>
+                <div class="form-group"><label>5. Ваши навыки и умения:</label><textarea name="Навыки" rows="2" required></textarea></div>
+                <div class="form-group"><label>6. Расскажите о себе:</label><textarea name="О себе" rows="2" required></textarea></div>
+                <button type="submit" class="submit-btn">Отправить заявку</button>
+            </form>
         </div>
 
         <!-- 5. Форма Staff (ЗАКРЫТА) -->
@@ -397,7 +391,6 @@
     </div>
 
     <!-- СКРИПТЫ -->
-  <!-- СКРИПТЫ -->
     <script>
         const TELEGRAM_BOT_TOKEN = '8654259157:AAGNbda9ZdXRA27cAtCghBTZpQqM98aINY8';
         const GROUP_CHAT_ID = '-1003836773135'; 
