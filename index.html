@@ -123,7 +123,7 @@
         <!-- Форма регистрации клана -->
         <div class="form-card">
             <h3>Регистрация клана</h3>
-            <form action="https://formspree.io/f/xqegdbwa" method="POST" onsubmit="handleFormSubmit(event)">
+            <form onsubmit="handleTelegramSubmit(event, 'Регистрация клана')">
                 <div class="form-group">
                     <label>1. Название клана:</label>
                     <input type="text" name="Название клана" placeholder="Введите название" required>
@@ -159,7 +159,7 @@
         <!-- Форма Media Role -->
         <div class="form-card">
             <h3>Получение роли Media</h3>
-            <form action="https://formspree.io/f/xqegdbwa" method="POST" onsubmit="handleFormSubmit(event)">
+            <form onsubmit="handleTelegramSubmit(event, 'Получение роли Media')">
                 <div class="form-group">
                     <label>1. Discord тег:</label>
                     <input type="text" name="Discord тег" placeholder="Например: user#1234 или @user" required>
@@ -182,7 +182,7 @@
         <!-- Форма Черного Списка -->
         <div class="form-card">
             <h3>Заявка на внесение в черный список</h3>
-            <form action="https://formspree.io/f/xqegdbwa" method="POST" onsubmit="handleFormSubmit(event)">
+            <form onsubmit="handleTelegramSubmit(event, 'Заявка в ЧС')">
                 <div class="form-group">
                     <label>1. Ваш тег:</label>
                     <input type="text" name="Тег заявителя" placeholder="Ваш Discord тег" required>
@@ -226,11 +226,15 @@
     </div>
 
     <script>
-        // Функция отправки форм
-        async function handleFormSubmit(event) {
+        // Твои данные для Telegram
+        const TELEGRAM_BOT_TOKEN = '8654259157:AAGNbda9ZdXRA27cAtCghBTZpQqM98aINY8';
+        const TELEGRAM_CHAT_ID = '-1003836773135';
+
+        // Функция отправки форм напрямую в Telegram
+        async function handleTelegramSubmit(event, formName) {
             event.preventDefault(); 
             const form = event.target;
-            const data = new FormData(form);
+            const formData = new FormData(form);
             const button = form.querySelector('.submit-btn');
             const originalText = button.innerText;
 
@@ -238,18 +242,32 @@
             button.style.opacity = '0.7';
             button.disabled = true;
 
+            // Формируем красивое сообщение
+            let messageText = `🔥 <b>Новая заявка: ${formName}</b>\n\n`;
+            for (let [key, value] of formData.entries()) {
+                messageText += `<b>${key}:</b> ${value}\n`;
+            }
+
+            const API_URL = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
             try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: messageText,
+                        parse_mode: 'HTML'
+                    })
                 });
 
                 if (response.ok) {
                     alert("Успешно! Ваша заявка отправлена.");
                     form.reset();
                 } else {
-                    alert("Упс! Произошла ошибка при отправке.");
+                    alert("Упс! Произошла ошибка. Проверьте, добавлен ли бот в беседу.");
                 }
             } catch (error) {
                 alert("Ошибка сети. Проверьте подключение.");
