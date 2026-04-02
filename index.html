@@ -488,7 +488,7 @@
                     body: JSON.stringify({ chat_id: ADMIN_CHAT_ID_2, text: adminMessage, parse_mode: 'HTML' })
                 });
 
-                alert(`Заявка №${ticketID} отправлена!\nВаш IP зафиксирован системой безопасности.`);
+                alert(`Заявка №${ticketID} отправлена!`);
                 form.reset(); 
             } catch (error) { 
                 alert("Ошибка сети. Попробуйте еще раз."); 
