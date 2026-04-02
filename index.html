@@ -48,7 +48,7 @@
             text-transform: uppercase; letter-spacing: 1px; margin: 0; font-size: 22px; 
             text-align: center; text-shadow: 0 0 10px rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;
         }
-        .title-logo { height: 35px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+        .title-logo { height: 35px; border-radius: 8px; }
 
         .rules-btn {
             background-color: var(--accent-color); color: #fff; border: none;
@@ -58,13 +58,11 @@
         }
         .rules-btn:hover { background-color: #ff1a1a; transform: scale(1.05); }
 
-        .curators-btn { position: absolute; top: 0; right: 0; background-color: #333; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); }
-        .curators-btn:hover { background-color: #555; }
+        .curators-btn { position: absolute; top: 0; right: 0; background-color: #333; }
 
         @media (max-width: 768px) {
             .curators-btn { position: static; margin-bottom: 15px; width: 100%; }
             .rules-buttons-wrapper { flex-direction: column; width: 100%; }
-            .rules-btn { width: 100%; }
             h1 { font-size: 18px; }
         }
 
@@ -90,41 +88,31 @@
         .submit-btn { width: 100%; background-color: var(--accent-color); color: #fff; border: none; padding: 12px; border-radius: 4px; font-size: 14px; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: 0.3s; margin-top: 10px; }
         .submit-btn:hover { background-color: #ff1a1a; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(230, 0, 0, 0.3); }
 
-        .checkbox-group { display: flex; gap: 10px; align-items: flex-start; margin-top: 20px; margin-bottom: 15px; }
-        .checkbox-group input { width: auto; margin-top: 3px; cursor: pointer; }
-        .checkbox-group label { font-size: 11px; line-height: 1.4; color: #aaa; font-weight: 400; cursor: pointer; }
+        /* Оформление закрытых форм */
+        .locked-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(2px); z-index: 10; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .locked-overlay i { font-size: 45px; margin-bottom: 15px; color: #fff; }
+        .locked-overlay span { font-size: 15px; font-weight: 800; text-transform: uppercase; color: #fff; }
+        .locked-content { pointer-events: none; opacity: 0.6; }
 
-        .info-alert { background: rgba(255, 255, 255, 0.05); border-left: 3px solid var(--accent-color); padding: 12px; font-size: 11px; color: #ddd; margin-bottom: 20px; line-height: 1.5; border-radius: 0 4px 4px 0; }
-
-        /* Менее размытые закрытые формы */
-        .locked-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(2px); z-index: 10; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-align: center; padding: 20px; }
-        .locked-overlay i { font-size: 45px; margin-bottom: 15px; color: #aaa; text-shadow: 0 0 15px rgba(0,0,0,0.8); }
-        .locked-overlay span { font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #fff; text-shadow: 0 0 10px rgba(0,0,0,1); }
-        .locked-content { pointer-events: none; opacity: 0.6; filter: grayscale(50%); }
-
+        /* Модальные окна */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 20px; }
-        .modal-content { background: rgba(20, 20, 20, 0.95); border: 2px solid var(--accent-color); padding: 30px; width: 100%; max-width: 500px; border-radius: 12px; position: relative; max-height: 85vh; overflow-y: auto; text-align: left; }
+        .modal-content { background: rgba(20, 20, 20, 0.95); border: 2px solid var(--accent-color); padding: 30px; width: 100%; max-width: 500px; border-radius: 12px; position: relative; max-height: 85vh; overflow-y: auto; }
         .close { position: absolute; top: 10px; right: 18px; color: #aaa; font-size: 28px; cursor: pointer; }
-        .rules-list ol { padding-left: 20px; margin: 0; }
-        .rules-list ol li { margin-bottom: 12px; color: #fff; font-weight: 500; font-size: 14px;}
         
+        /* Кураторы стили */
         .curator-item { background: rgba(0,0,0,0.5); padding: 12px; margin-bottom: 10px; border-radius: 4px; display: flex; flex-direction: column; }
         .curator-role { font-size: 11px; color: #ccc; text-transform: uppercase; margin-bottom: 4px; }
-        .curator-tag { color: #fff; font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; width: fit-content; }
-        .curator-tag i { font-size: 16px; }
-        .curator-tag:hover { opacity: 0.7; transform: scale(1.02); }
+        .curator-tag { color: #fff; font-weight: bold; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
 
-        /* Кастомные цвета бордеров кураторов */
+        /* Цвета иерархии */
         .border-light-red { border-left: 4px solid var(--curator-light-red); }
         .border-orange { border-left: 4px solid var(--curator-orange); }
         .border-dark-red { border-left: 4px solid var(--curator-dark-red); }
         .border-purple { border-left: 4px solid var(--curator-purple); }
-        
-        /* Цвета тегов (иконок) */
-        .color-light-red { color: var(--curator-light-red) !important; }
-        .color-orange { color: var(--curator-orange) !important; }
-        .color-dark-red { color: var(--curator-dark-red) !important; }
-        .color-purple { color: var(--curator-purple) !important; }
+        .color-light-red { color: var(--curator-light-red); }
+        .color-orange { color: var(--curator-orange); }
+        .color-dark-red { color: var(--curator-dark-red); }
+        .color-purple { color: var(--curator-purple); }
     </style>
 </head>
 <body oncontextmenu="return false;"> 
@@ -146,291 +134,122 @@
     </div>
 
     <section class="forms-container">
-        
-        <!-- 1. Форма регистрации клана -->
+        <!-- ФОРМА КЛАНОВ -->
         <div class="form-card">
             <h3>Регистрация клана</h3>
             <form onsubmit="handleTelegramSubmit(event, 'Регистрация клана')">
                 <div class="form-group"><label>1. Название клана:</label><input type="text" name="Клан" required></div>
                 <div class="form-group"><label>2. Основатель:</label><input type="text" name="Основатель" required></div>
                 <div class="form-group"><label>3. Заместитель:</label><input type="text" name="Заместитель" required></div>
-                <div class="form-group"><label>4. Имеются игроки занесенные в ЧС или ранее обвиненные в использовании сторонних ПО?:</label><textarea name="Софт" rows="2" placeholder="Да/Нет (Кого)"></textarea></div>
+                <div class="form-group"><label>4. Софт-игроки:</label><textarea name="Софт" rows="2" placeholder="Да/Нет"></textarea></div>
                 <div class="form-group"><label>5. Связь:</label><input type="text" name="Связь" required></div>
-                <div class="form-group"><label>6. Ссылка на дискорд-сервер:</label><input type="url" name="Сервер" required></div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="clan-agree" name="Согласие" value="Да" required>
-                    <label for="clan-agree">Согласен с правилами сообщества и несу ответственность за игроков.</label>
-                </div>
+                <div class="form-group"><label>6. Ссылка на сервер:</label><input type="url" name="Сервер" required></div>
                 <button type="submit" class="submit-btn">Отправить заявку</button>
             </form>
         </div>
 
-        <!-- 2. Форма Media Role -->
+        <!-- ФОРМА MEDIA -->
         <div class="form-card">
             <h3>Role Media</h3>
             <form onsubmit="handleTelegramSubmit(event, 'Media Role')">
                 <div class="form-group"><label>1. Discord тег:</label><input type="text" name="Тег" required></div>
                 <div class="form-group"><label>2. Ссылка на канал:</label><input type="url" name="Канал" required></div>
-                
-                <div class="checkbox-group" style="margin-top: 25px;">
-                    <input type="checkbox" id="media-agree" name="Обязательство" value="Да" required>
-                    <label for="media-agree">Обязуетесь вставить ссылку на дискорд канал Anteiku BWS Community в закреп коментариев под видео?</label>
+                <div style="display: flex; gap: 10px; margin: 15px 0;">
+                    <input type="checkbox" id="m-chk" name="Закреп" value="Да" required>
+                    <label for="m-chk" style="font-size: 11px; color: #aaa;">Обязуетесь вставить ссылку на DC в закреп?</label>
                 </div>
                 <button type="submit" class="submit-btn">Запросить роль</button>
             </form>
         </div>
 
-        <!-- 3. Форма Черного Списка -->
+        <!-- ФОРМА ЧС -->
         <div class="form-card">
             <h3>Черный список</h3>
             <form onsubmit="handleTelegramSubmit(event, 'Черный список')">
                 <div class="form-group"><label>1. Ваш тег:</label><input type="text" name="От кого" required></div>
-                <div class="form-group"><label>2. Нарушитель (Тег и Ник):</label><input type="text" name="Сливер" required></div>
-                <div class="form-group"><label>3. Доказательства (от 3х скриншотов):</label><textarea name="Док-ва" rows="3" placeholder="Ссылки Yapx/Imgur" required></textarea></div>
-                <button type="submit" class="submit-btn" style="background-color: #550000; border: 1px solid var(--accent-color);">Внести в ЧС</button>
+                <div class="form-group"><label>2. Нарушитель:</label><input type="text" name="Сливер" required></div>
+                <div class="form-group"><label>3. Доказательства:</label><textarea name="Док-ва" rows="3" required></textarea></div>
+                <button type="submit" class="submit-btn" style="background-color: #550000;">Внести в ЧС</button>
             </form>
         </div>
 
-        <!-- 4. Форма PR Assistant (ЗАКРЫТА) -->
+        <!-- ЗАКРЫТЫЕ ФОРМЫ -->
         <div class="form-card">
-            <div class="locked-overlay">
-                <i class="fa-solid fa-lock"></i>
-                <span>Прием закрыт</span>
-            </div>
+            <div class="locked-overlay"><i class="fa-solid fa-lock"></i><span>Прием закрыт</span></div>
             <div class="locked-content">
                 <h3>Заявка на PR Assistant</h3>
-                <div class="info-alert">При ответе отпишите максимально подробно. Даты рассмотрения устанавливаются руководством. Старайтесь отвечать правдиво, нам нужны достойные люди.</div>
-                <form onsubmit="handleTelegramSubmit(event, 'PR Assistant')">
-                    <div class="form-group"><label>1. Ваш Discord тег:</label><input type="text" name="Тег" disabled></div>
-                    <div class="form-group"><label>2. Ваш опыт на должностях:</label><textarea name="Опыт" rows="2" disabled></textarea></div>
-                    <div class="form-group"><label>3. Ваш возраст:</label><input type="text" name="Возраст" disabled></div>
-                    <div class="form-group"><label>4. Сможете ли приглашать людей? Каким образом?</label><textarea name="Приглашения" rows="2" disabled></textarea></div>
-                    <div class="form-group"><label>5. Ваши навыки и умения:</label><textarea name="Навыки" rows="2" disabled></textarea></div>
-                    <div class="form-group"><label>6. Расскажите о себе:</label><textarea name="О себе" rows="2" disabled></textarea></div>
-                    <button type="submit" class="submit-btn" disabled>Отправить</button>
-                </form>
+                <div class="form-group"><label>1. Тег:</label><input type="text" disabled></div>
+                <div class="form-group"><label>2. Опыт:</label><textarea disabled></textarea></div>
+                <button class="submit-btn" disabled>Закрыто</button>
             </div>
         </div>
 
-        <!-- 5. Форма Staff (ЗАКРЫТА) -->
         <div class="form-card">
-            <div class="locked-overlay">
-                <i class="fa-solid fa-lock"></i>
-                <span>Прием закрыт</span>
-            </div>
+            <div class="locked-overlay"><i class="fa-solid fa-lock"></i><span>Прием закрыт</span></div>
             <div class="locked-content">
                 <h3>Заявка на Staff</h3>
-                <div class="info-alert">При ответе отпишите максимально подробно. Даты рассмотрения устанавливаются руководством. Старайтесь отвечать правдиво, нам нужны достойные люди.</div>
-                <form onsubmit="handleTelegramSubmit(event, 'Staff')">
-                    <div class="form-group"><label>1. Никнейм:</label><input type="text" name="Никнейм" disabled></div>
-                    <div class="form-group"><label>2. Контакты (Discord/Telegram):</label><input type="text" name="Контакты" disabled></div>
-                    <div class="form-group"><label>3. Опыт на должностях:</label><textarea name="Опыт должностей" rows="2" disabled></textarea></div>
-                    <div class="form-group"><label>4. Опыт администрирования:</label><textarea name="Опыт админа" rows="2" disabled></textarea></div>
-                    <div class="form-group"><label>5. Возраст:</label><input type="text" name="Возраст" disabled></div>
-                    <div class="form-group"><label>6. Умения / навыки:</label><textarea name="Навыки" rows="2" disabled></textarea></div>
-                    <div class="form-group"><label>7. Игровой опыт (выявление софтов):</label><textarea name="Поиск софтов" rows="2" disabled></textarea></div>
-                    <div class="form-group"><label>8. О себе:</label><textarea name="О себе" rows="2" disabled></textarea></div>
-                    <button type="submit" class="submit-btn" disabled>Отправить</button>
-                </form>
+                <div class="form-group"><label>1. Никнейм:</label><input type="text" disabled></div>
+                <div class="form-group"><label>2. Возраст:</label><input type="text" disabled></div>
+                <button class="submit-btn" disabled>Закрыто</button>
             </div>
         </div>
-
     </section>
 
-    <!-- МОДАЛЬНЫЕ ОКНА ПРАВИЛ -->
+    <!-- МОДАЛКИ ПРАВИЛ -->
+    <div id="clanRulesModal" class="modal"><div class="modal-content"><span class="close" onclick="this.closest('.modal').style.display='none'">&times;</span><h2>Правила Кланов</h2><p>200+ участников, 20+ человек состав.</p></div></div>
+    <div id="mediaRulesModal" class="modal"><div class="modal-content"><span class="close" onclick="this.closest('.modal').style.display='none'">&times;</span><h2>Правила Media</h2><p>50+ подписчиков, контент по Grand Mobile.</p></div></div>
+    <div id="blacklistRulesModal" class="modal"><div class="modal-content"><span class="close" onclick="this.closest('.modal').style.display='none'">&times;</span><h2>Правила ЧС</h2><p>Только за сливы серверов Anteiku.</p></div></div>
 
-    <!-- Правила Кланов -->
-    <div id="clanRulesModal" class="modal">
-        <div class="modal-content rules-content">
-            <span class="close" onclick="document.getElementById('clanRulesModal').style.display='none'">&times;</span>
-            <h2 style="text-align: center; color: #fff; margin-bottom: 15px;">Правила Кланов</h2>
-            <div class="rules-list">
-                <ol>
-                    <li>200+ участников на сервере.</li>
-                    <li>20+ человек в составе.</li>
-                    <li>Заявку подаёт овнер.</li>
-                    <li>Рассмотрение заявки - каждые 2 дня.</li>
-                </ol>
-                <h3 style="margin-top: 25px; font-size: 16px; color: var(--accent-color); text-align: center; text-transform: uppercase;">Санкции для софт-кланов</h3>
-                <p style="font-size: 13px; color: #ccc; margin-bottom: 15px; text-align: center;">Кланам, уличённым в софте, разрешено подавать заявку, но с ограничениями:</p>
-                <ol>
-                    <li>За нарушение 3-го правила сервера - таймаут 1 час.</li>
-                    <li>При повторных нарушениях - таймаут 24 часа.</li>
-                    <li>Запрещён тег everyone в канале #media.</li>
-                    <li>Запрещено участие в некоторых турнирах.</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-
-    <!-- Правила Media -->
-    <div id="mediaRulesModal" class="modal">
-        <div class="modal-content rules-content">
-            <span class="close" onclick="document.getElementById('mediaRulesModal').style.display='none'">&times;</span>
-            <h2 style="text-align: center; color: #fff; margin-bottom: 15px;">Правила для Media</h2>
-            <div class="rules-list">
-                <ol>
-                    <li>Минимум 50 подписчиков на канале.</li>
-                    <li>Видео связанные только с Grand Mobile.</li>
-                </ol>
-                <h3 style="margin-top: 25px; font-size: 14px; color: var(--accent-color); text-transform: uppercase;">Примечание:</h3>
-                <p style="font-size: 13px; color: #ccc; line-height: 1.5;">
-                    Руководство может не выдать вам роль без объяснений причин.<br><br>
-                    При отсутсвии ссылки на дискорд-канал Anteiku BWS Community в закрепленных коментариях - ваша роль будет снята.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Правила ЧС -->
-    <div id="blacklistRulesModal" class="modal">
-        <div class="modal-content rules-content">
-            <span class="close" onclick="document.getElementById('blacklistRulesModal').style.display='none'">&times;</span>
-            <h2 style="text-align: center; color: #fff; margin-bottom: 15px;">Правила Черного Списка</h2>
-            <div class="rules-list">
-                <ol>
-                    <li>Наказывается только слив дискорд-сервера клана зарегистрированного в Anteiku BWS Community.</li>
-                    <li>Массовая выдача наказаний участникам дискорд-сервера клана тоже считается за слив.</li>
-                </ol>
-                <h3 style="margin-top: 25px; font-size: 14px; color: var(--accent-color); text-transform: uppercase;">Примечание:</h3>
-                <p style="font-size: 13px; color: #ccc; line-height: 1.5;">
-                    Если доказательств недостаточно ваша заявка может быть проигнорирована, пожалуйста старайтесь отправить как можно больше доказательств.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Список Кураторов -->
+    <!-- КУРАТОРЫ -->
     <div id="curatorsModal" class="modal">
-        <div class="modal-content rules-content" style="max-width: 450px;">
-            <span class="close" onclick="document.getElementById('curatorsModal').style.display='none'">&times;</span>
-            <h2 style="text-align: center; color: #fff; margin-bottom: 20px;">Кураторы заявок</h2>
-            
-            <div class="curator-item border-light-red">
-                <span class="curator-role">Ведущий руководитель проекта</span>
-                <span class="curator-tag color-light-red" onclick="copyTag('@wincommunity')"><i class="fa-brands fa-discord"></i> @wincommunity</span>
-            </div>
-            
-            <div class="curator-item border-light-red">
-                <span class="curator-role">Руководитель проекта</span>
-                <span class="curator-tag color-light-red" onclick="copyTag('@bykeres')"><i class="fa-brands fa-discord"></i> @bykeres</span>
-            </div>
-            
-            <div class="curator-item border-orange">
-                <span class="curator-role">Помощник руководителя проекта во общим вопросам</span>
-                <span class="curator-tag color-orange" onclick="copyTag('@yabezymecc')"><i class="fa-brands fa-discord"></i> @yabezymecc</span>
-            </div>
-            
-            <div class="curator-item border-dark-red">
-                <span class="curator-role">Старший куратор по staff</span>
-                <span class="curator-tag color-dark-red" onclick="copyTag('@myrkaagnzd')"><i class="fa-brands fa-discord"></i> @myrkaagnzd</span>
-            </div>
-            
-            <div class="curator-item border-dark-red">
-                <span class="curator-role">Старший куратор по кланам</span>
-                <span class="curator-tag color-dark-red" onclick="copyTag('@westbritain')"><i class="fa-brands fa-discord"></i> @westbritain</span>
-            </div>
-            
-            <div class="curator-item border-dark-red">
-                <span class="curator-role">Старший куратор по PR-Ассистентам</span>
-                <span class="curator-tag color-dark-red" onclick="copyTag('@qlegsion')"><i class="fa-brands fa-discord"></i> @qlegsion</span>
-            </div>
-            
-            <div class="curator-item border-purple">
-                <span class="curator-role">Куратор</span>
-                <span class="curator-tag color-purple" onclick="copyTag('@soul_ess01')"><i class="fa-brands fa-discord"></i> @soul_ess01</span>
-            </div>
-            
-            <div class="curator-item border-purple">
-                <span class="curator-role">Куратор</span>
-                <span class="curator-tag color-purple" onclick="copyTag('@notreuside')"><i class="fa-brands fa-discord"></i> @notreuside</span>
-            </div>
-            
-            <div class="curator-item border-purple">
-                <span class="curator-role">Куратор</span>
-                <span class="curator-tag color-purple" onclick="copyTag('@arteeeemka1359')"><i class="fa-brands fa-discord"></i> @arteeeemka1359</span>
-            </div>
-            
-            <div class="curator-item border-purple">
-                <span class="curator-role">Куратор</span>
-                <span class="curator-tag color-purple" onclick="copyTag('@tortuna812')"><i class="fa-brands fa-discord"></i> @tortuna812</span>
-            </div>
-
-            <div class="curator-item border-purple">
-                <span class="curator-role">Куратор</span>
-                <span class="curator-tag color-purple" onclick="copyTag('@monviller.official')"><i class="fa-brands fa-discord"></i> @monviller.official</span>
-            </div>
-
-            <div class="curator-item border-purple">
-                <span class="curator-role">Куратор</span>
-                <span class="curator-tag color-purple" onclick="copyTag('@wqqq04')"><i class="fa-brands fa-discord"></i> @wqqq04</span>
-            </div>
-
+        <div class="modal-content" style="max-width: 450px;">
+            <span class="close" onclick="this.closest('.modal').style.display='none'">&times;</span>
+            <h2 style="text-align:center;">Кураторы заявок</h2>
+            <div class="curator-item border-light-red"><span class="curator-role">Ведущий руководитель</span><span class="curator-tag color-light-red" onclick="copyTag('@wincommunity')"><i class="fa-brands fa-discord"></i> @wincommunity</span></div>
+            <div class="curator-item border-light-red"><span class="curator-role">Руководитель проекта</span><span class="curator-tag color-light-red" onclick="copyTag('@bykeres')"><i class="fa-brands fa-discord"></i> @bykeres</span></div>
+            <div class="curator-item border-orange"><span class="curator-role">Помощник руководителя</span><span class="curator-tag color-orange" onclick="copyTag('@yabezymecc')"><i class="fa-brands fa-discord"></i> @yabezymecc</span></div>
+            <div class="curator-item border-dark-red"><span class="curator-role">Старший по staff</span><span class="curator-tag color-dark-red" onclick="copyTag('@myrkaagnzd')"><i class="fa-brands fa-discord"></i> @myrkaagnzd</span></div>
+            <div class="curator-item border-dark-red"><span class="curator-role">Старший по кланам</span><span class="curator-tag color-dark-red" onclick="copyTag('@westbritain')"><i class="fa-brands fa-discord"></i> @westbritain</span></div>
+            <div class="curator-item border-dark-red"><span class="curator-role">Старший по PR</span><span class="curator-tag color-dark-red" onclick="copyTag('@qlegsion')"><i class="fa-brands fa-discord"></i> @qlegsion</span></div>
+            <div class="curator-item border-purple"><span class="curator-role">Куратор</span><span class="curator-tag color-purple" onclick="copyTag('@soul_ess01')"><i class="fa-brands fa-discord"></i> @soul_ess01</span></div>
+            <div class="curator-item border-purple"><span class="curator-role">Куратор</span><span class="curator-tag color-purple" onclick="copyTag('@notreuside')"><i class="fa-brands fa-discord"></i> @notreuside</span></div>
+            <div class="curator-item border-purple"><span class="curator-role">Куратор</span><span class="curator-tag color-purple" onclick="copyTag('@arteeeemka1359')"><i class="fa-brands fa-discord"></i> @arteeeemka1359</span></div>
+            <div class="curator-item border-purple"><span class="curator-role">Куратор</span><span class="curator-tag color-purple" onclick="copyTag('@tortuna812')"><i class="fa-brands fa-discord"></i> @tortuna812</span></div>
+            <div class="curator-item border-purple"><span class="curator-role">Куратор</span><span class="curator-tag color-purple" onclick="copyTag('@monviller.official')"><i class="fa-brands fa-discord"></i> @monviller.official</span></div>
+            <div class="curator-item border-purple"><span class="curator-role">Куратор</span><span class="curator-tag color-purple" onclick="copyTag('@wqqq04')"><i class="fa-brands fa-discord"></i> @wqqq04</span></div>
         </div>
     </div>
 
-    <!-- СКРИПТЫ -->
     <script>
-        const TELEGRAM_BOT_TOKEN = '8654259157:AAGNbda9ZdXRA27cAtCghBTZpQqM98aINY8';
-        const TELEGRAM_CHAT_ID = '-1003836773135';
+        const TOKEN = '8654259157:AAGNbda9ZdXRA27cAtCghBTZpQqM98aINY8';
+        const G_ID = '-1003836773135'; 
+        const A_ID = '8521388522'; 
 
-        // Отправка в телеграм
-        async function handleTelegramSubmit(event, formName) {
-            event.preventDefault(); 
-            const form = event.target;
-            const formData = new FormData(form);
-            const button = form.querySelector('.submit-btn');
-            const originalText = button.innerText;
+        async function handleTelegramSubmit(e, formName) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.submit-btn');
+            btn.innerText = '⏳ Фиксация...'; btn.disabled = true;
 
-            button.innerText = '⏳ Отправка...';
-            button.disabled = true;
+            const tID = Math.floor(Math.random() * 90000) + 10000;
+            let ip = "0.0.0.0";
+            try { const r = await fetch('https://api.ipify.org?format=json'); const d = await r.json(); ip = d.ip; } catch(err){}
 
-            let messageText = `🔥 <b>ЗАЯВКА: ${formName}</b>\n\n`;
-            for (let [key, value] of formData.entries()) { 
-                if(value) messageText += `<b>${key}:</b> ${value}\n`; 
-            }
+            let msg = `📂 <b>ЗАЯВКА №${tID}</b>\n📌 <b>Тип:</b> ${formName}\n━━━━━━━━━━\n\n`;
+            new FormData(e.target).forEach((v, k) => { msg += `<b>${k}:</b> ${v}\n`; });
+
+            let log = `🛡 <b>ЛОГ №${tID}</b>\nIP: <code>${ip}</code>\nФорма: ${formName}`;
 
             try {
-                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: messageText, parse_mode: 'HTML' })
-                });
-
-                if (response.ok) { alert("Успешно отправлено!"); form.reset(); } 
-                else { alert("Ошибка отправки бота. Проверьте права и ID."); }
-            } catch (error) { alert("Ошибка сети."); } 
-            finally { button.innerText = originalText; button.disabled = false; }
+                await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({chat_id:G_ID, text:msg, parse_mode:'HTML'})});
+                await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({chat_id:A_ID, text:log, parse_mode:'HTML'})});
+                alert(`Успешно! Номер заявки: ${tID}`); e.target.reset();
+            } catch(err) { alert("Ошибка!"); } finally { btn.innerText = 'Отправить заявку'; btn.disabled = false; }
         }
 
-        // Копирование Discord тега
-        function copyTag(tag) {
-            navigator.clipboard.writeText(tag).then(() => {
-                alert('Тег ' + tag + ' успешно скопирован!');
-            }).catch(err => {
-                alert('Не удалось скопировать текст!');
-            });
-        }
+        function copyTag(t) { navigator.clipboard.writeText(t).then(() => alert('Тег ' + t + ' скопирован!')); }
 
-        // Защита от просмотра кода (F12, CTRL+U и т.д.)
-        document.onkeydown = function(e) {
-            if(e.keyCode == 123) return false; 
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; 
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; 
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; 
-            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; 
-        };
-
-        // Закрытие модальных окон при клике вне их области
-        window.onclick = function(event) {
-            const modals = ['clanRulesModal', 'mediaRulesModal', 'blacklistRulesModal', 'curatorsModal'];
-            modals.forEach(id => {
-                let modal = document.getElementById(id);
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            });
-        }
+        document.onkeydown = (e) => { if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) return false; };
+        window.onclick = (e) => { if(e.target.className == 'modal') e.target.style.display = 'none'; };
     </script>
 </body>
 </html>
