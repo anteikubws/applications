@@ -154,7 +154,7 @@
                 <div class="form-group"><label>1. Название клана:</label><input type="text" name="Клан" required></div>
                 <div class="form-group"><label>2. Основатель:</label><input type="text" name="Основатель" required></div>
                 <div class="form-group"><label>3. Заместитель:</label><input type="text" name="Заместитель" required></div>
-                <div class="form-group"><label>4. Софт-игроки:</label><textarea name="Софт" rows="2" placeholder="Да/Нет (Кого)"></textarea></div>
+                <div class="form-group"><label>4. Есть ли в клане игроки которые находятся в ЧС сообщества?:</label><textarea name="Софт" rows="2" placeholder="Да/Нет (Кого)"></textarea></div>
                 <div class="form-group"><label>5. Связь:</label><input type="text" name="Связь" required></div>
                 <div class="form-group"><label>6. Ссылка на сервер:</label><input type="url" name="Сервер" required></div>
                 <div class="checkbox-group">
@@ -441,7 +441,7 @@
                     body: JSON.stringify({ chat_id: ADMIN_CHAT_ID_2, text: adminMessage, parse_mode: 'HTML' })
                 });
 
-                alert(`Заявка №${ticketID} отправлена!\nВаш IP зафиксирован системой безопасности.`);
+                alert(`Заявка №${ticketID} отправлена!`);
                 form.reset(); 
             } catch (error) { 
                 alert("Ошибка сети. Попробуйте еще раз."); 
