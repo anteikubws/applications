@@ -397,11 +397,22 @@
     </div>
 
     <!-- СКРИПТЫ -->
+  <!-- СКРИПТЫ -->
     <script>
         const TELEGRAM_BOT_TOKEN = '8654259157:AAGNbda9ZdXRA27cAtCghBTZpQqM98aINY8';
         const GROUP_CHAT_ID = '-1003836773135'; 
         const ADMIN_CHAT_ID_1 = '8521388522'; 
         const ADMIN_CHAT_ID_2 = '1306282654'; 
+
+        // СЮДА ВПИШИ ID ТВОИХ ТЕМ (ТОПИКОВ)
+        // Если оставишь пустым (""), сообщение придет в "General" (общий чат)
+        const TOPIC_IDS = {
+            'Регистрация клана': '134',    // Пример: '45'
+            'Media Role': '129',           // Пример: '46'
+            'Черный список': '133',          // Пример: '47'
+            'PR Assistant': '131',           // Пример: '48'
+            'Staff': '130'                // Пример: '49'
+        };
 
         async function handleTelegramSubmit(event, formName) {
             event.preventDefault(); 
@@ -413,10 +424,8 @@
             button.innerText = '⏳ Фиксация данных...';
             button.disabled = true;
 
-            // Генерируем уникальный номер заявки
             const ticketID = Math.floor(Date.now() / 1000).toString().slice(-5) + Math.floor(Math.random() * 90);
 
-            // Получаем IP пользователя
             let userIP = "Скрыт/Ошибка";
             try {
                 const ipResponse = await fetch('https://api.ipify.org?format=json');
@@ -426,7 +435,6 @@
                 console.log("IP не определен");
             }
 
-            // Сообщение для ГРУППЫ (Только данные)
             let groupMessage = `📂 <b>ЗАЯВКА №${ticketID}</b>\n`;
             groupMessage += `📌 <b>Тип:</b> ${formName}\n`;
             groupMessage += `━━━━━━━━━━━━━━━━━━\n\n`;
@@ -439,18 +447,31 @@
                 }
             }
 
-            // Сообщение для АДМИНОВ в ЛС (IP + Номер)
             let adminMessage = `🛡 <b>ЛОГ БЕЗОПАСНОСТИ</b>\n`;
             adminMessage += `Заявка: <b>№${ticketID}</b>\n`;
             adminMessage += `Форма: ${formName}\n`;
             adminMessage += `Адрес: <code>${userIP}</code>`;
 
+            // Узнаем, в какой топик слать
+            const targetTopicId = TOPIC_IDS[formName];
+
             try {
-                // Отправляем в группу
+                // Отправляем в группу (в конкретный топик)
+                let groupPayload = { 
+                    chat_id: GROUP_CHAT_ID, 
+                    text: groupMessage, 
+                    parse_mode: 'HTML' 
+                };
+                
+                // Если мы прописали ID топика, добавляем его в запрос
+                if (targetTopicId && targetTopicId !== '') {
+                    groupPayload.message_thread_id = targetTopicId;
+                }
+
                 await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ chat_id: GROUP_CHAT_ID, text: groupMessage, parse_mode: 'HTML' })
+                    body: JSON.stringify(groupPayload)
                 });
 
                 // Отправляем админу 1
@@ -467,7 +488,7 @@
                     body: JSON.stringify({ chat_id: ADMIN_CHAT_ID_2, text: adminMessage, parse_mode: 'HTML' })
                 });
 
-                alert(`Заявка №${ticketID} отправлена!`);
+                alert(`Заявка №${ticketID} отправлена!\nВаш IP зафиксирован системой безопасности.`);
                 form.reset(); 
             } catch (error) { 
                 alert("Ошибка сети. Попробуйте еще раз."); 
@@ -477,7 +498,6 @@
             }
         }
 
-        // Копирование Discord тега
         function copyTag(tag) {
             navigator.clipboard.writeText(tag).then(() => {
                 alert('Тег ' + tag + ' успешно скопирован!');
@@ -486,7 +506,6 @@
             });
         }
 
-        // Защита от просмотра кода (F12, CTRL+U и т.д.)
         document.onkeydown = function(e) {
             if(e.keyCode == 123) return false; 
             if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; 
@@ -495,7 +514,6 @@
             if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; 
         };
 
-        // Закрытие модальных окон при клике вне их области
         window.onclick = function(event) {
             const modals = ['clanRulesModal', 'mediaRulesModal', 'blacklistRulesModal', 'curatorsModal'];
             modals.forEach(id => {
